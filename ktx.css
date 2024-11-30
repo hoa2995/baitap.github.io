@@ -1,0 +1,1053 @@
+:root {
+  --primary: #2196F3;
+  --dark: #1976D2;
+  --light: #BBDEFB;
+  --text: #212121;
+  
+  /* Add dark mode colors */
+  --dark-bg: #121212;
+  --dark-card: #1E1E1E;
+  --dark-text: #E0E0E0;
+  --dark-border: #333333;
+  --dark-hover: #2C2C2C;
+  --dark-input: #2C2C2C;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+}
+
+body {
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  min-height: 100vh;
+}
+
+body.dark-mode {
+  background: linear-gradient(135deg, #1a1a1a 0%, #2d3436 100%);
+  color: var(--dark-text);
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  padding-left: 80px;
+  transition: all 0.3s ease;
+}
+
+.sidebar.open + .container {
+  margin-left: 300px;
+  padding-left: 20px;
+}
+
+.header {
+  background: linear-gradient(135deg, #00b4db 0%, #0083b0 100%);
+  padding: 25px 0;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  margin-bottom: 40px;
+  transition: margin-left 0.3s ease;
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.header h1 {
+  font-size: 2.5em;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+  letter-spacing: 1px;
+  text-align: center;
+  width: 100%;
+}
+
+.room-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.room-card {
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(10px);
+  border-radius: 15px;
+  padding: 20px;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+  border: 1px solid rgba(255,255,255,0.2);
+  transition: all 0.3s ease;
+}
+
+.room-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+}
+
+.dark-mode .room-card {
+  background: rgba(30, 30, 30, 0.9);
+  border: 1px solid rgba(255,255,255,0.1);
+  color: var(--dark-text);
+}
+
+.dark-mode .room-card:hover {
+  background: var(--dark-hover);
+}
+
+.room-status {
+  display: inline-block;
+  padding: 8px 15px;
+  border-radius: 20px;
+  font-size: 0.9em;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  margin-bottom: 10px;
+}
+
+.available {
+  background: #4CAF50;
+  color: white;
+}
+
+.occupied {
+  background: #F44336;
+  color: white;
+}
+
+.maintenance {
+  background: #FFC107;
+  color: black;
+}
+
+.repairs {
+  background: #FF5722;
+  color: white;
+}
+
+.cleaning {
+  background: #9C27B0;
+  color: white;
+}
+
+.damaged {
+  background: #795548;
+  color: white;
+}
+
+.controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 20px;
+  align-items: center;
+}
+
+.search-box {
+  flex: 1;
+  min-width: 200px;
+  position: relative;
+}
+
+.search-box input {
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid rgba(0,0,0,0.1);
+  border-radius: 25px;
+  padding: 15px 25px;
+  font-size: 1em;
+  width: 100%;
+  transition: all 0.3s ease;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.search-box input:focus {
+  border-color: #4f46e5;
+  box-shadow: 0 5px 20px rgba(79, 70, 229, 0.2);
+  outline: none;
+}
+
+.dark-mode .search-box input {
+  background: rgba(50, 50, 50, 0.9);
+  border-color: rgba(255,255,255,0.1);
+  color: white;
+}
+
+button {
+  background: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%);
+  padding: 12px 25px;
+  border-radius: 25px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  box-shadow: 0 5px 15px rgba(79, 70, 229, 0.3);
+  border: none;
+  border-radius: 6px;
+  background: linear-gradient(135deg, var(--primary), var(--dark));
+  color: white;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+}
+
+button:hover {
+  background: linear-gradient(135deg, #4f46e5 0%, #6366f1 100%);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(79, 70, 229, 0.4);
+}
+
+button:active {
+  transform: translateY(1px);
+  box-shadow: 0 2px 5px rgba(33,150,243,0.2);
+}
+
+button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    120deg,
+    transparent,
+    rgba(255,255,255,0.2),
+    transparent
+  );
+  transition: 0.5s;
+}
+
+button:hover::before {
+  left: 100%;
+}
+
+.modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.5);
+}
+
+.modal-content {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  border-radius: 20px;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+  border: 1px solid rgba(255,255,255,0.3);
+  padding: 30px;
+  width: 90%;
+  max-width: 500px;
+  margin: 50px auto;
+  border-radius: 8px;
+}
+
+.dark-mode .modal-content {
+  background: rgba(30, 30, 30, 0.95);
+  border: 1px solid rgba(255,255,255,0.1);
+  color: var(--dark-text);
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.form-group input, .form-group select {
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid rgba(0,0,0,0.1);
+  border-radius: 10px;
+  padding: 12px 15px;
+  font-size: 1em;
+  width: 100%;
+  transition: all 0.3s ease;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+  border-color: #4f46e5;
+  box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.2);
+  outline: none;
+}
+
+.dark-mode .form-group input,
+.dark-mode .form-group select {
+  background: rgba(50, 50, 50, 0.9);
+  border-color: rgba(255,255,255,0.1);
+  color: white;
+}
+
+.register-modal .student-info {
+  margin-top: 15px;
+  padding: 10px;
+  background: #f8f9fa;
+  border-radius: 4px;
+}
+
+.register-modal h3 {
+  margin-bottom: 15px;
+  color: var(--primary);
+}
+
+.cancel-registration {
+  background: linear-gradient(135deg, #dc3545, #c82333);
+}
+
+.cancel-registration:hover {
+  background: linear-gradient(135deg, #c82333, #dc3545);
+}
+
+.registrations-list {
+  margin-top: 20px;
+  padding: 15px;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.dark-mode .registrations-list {
+  background: var(--dark-card);
+}
+
+.registration-item {
+  padding: 10px;
+  border-bottom: 1px solid #eee;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.building-section {
+  margin-bottom: 30px;
+  width: 100%;
+}
+
+.building-section h2 {
+  cursor: pointer;
+  user-select: none;
+  padding: 10px;
+  background: var(--light);
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+}
+
+.building-section h2:hover {
+  background: var(--primary);
+  color: white;
+}
+
+.dark-mode .building-section h2 {
+  background: var(--dark-card);
+  color: var(--dark-text);
+}
+
+.building-section h2:hover {
+  background: var(--light);
+  color: var(--text);
+}
+
+.building-rooms {
+  margin-top: 15px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 20px;
+}
+
+.no-rooms {
+  padding: 15px;
+  text-align: center;
+  color: #666;
+  font-style: italic;
+}
+
+#addBuildingModal .modal-content {
+  max-width: 400px;
+}
+
+#roomType + button {
+  display: block;
+  width: 100%;
+  margin-top: 10px;
+}
+
+.edit-status-btn {
+  background: linear-gradient(135deg, #607D8B, #455A64);
+}
+
+.edit-status-btn:hover {
+  background: linear-gradient(135deg, #455A64, #607D8B);
+}
+
+.student-list-item {
+  padding: 10px;
+  border-bottom: 1px solid #eee;
+  margin-bottom: 10px;
+}
+
+.student-list-item:last-child {
+  border-bottom: none;
+}
+
+.no-students {
+  padding: 15px;
+  text-align: center;
+  color: #666;
+  font-style: italic;
+}
+
+.room-number {
+  cursor: pointer;
+  color: var(--primary);
+  text-decoration: underline;
+}
+
+.room-number:hover {
+  color: var(--dark);
+}
+
+/* Disabled button styles */
+button:disabled {
+  background: #ccc;
+  cursor: not-allowed;
+  transform: none;
+  opacity: 0.7;
+}
+
+button:disabled:hover {
+  box-shadow: none;
+  transform: none;
+}
+
+/* Controls section buttons */
+.controls button {
+  min-width: 120px;
+  font-size: 0.9em;
+  border-radius: 20px;
+  margin: 2px;
+}
+
+/* Modal buttons specific styles */
+.modal-content button {
+  margin: 5px;
+  width: calc(50% - 10px);
+  display: inline-block;
+}
+
+.modal-content button[type="submit"] {
+  background: linear-gradient(135deg, #4CAF50, #388E3C);
+}
+
+.modal-content button[type="submit"]:hover {
+  background: linear-gradient(135deg, #388E3C, #4CAF50);
+}
+
+.modal-content button[type="button"] {
+  background: linear-gradient(135deg, #9E9E9E, #757575);
+}
+
+.modal-content button[type="button"]:hover {
+  background: linear-gradient(135deg, #757575, #9E9E9E);
+}
+
+/* Add dark mode toggle button styles */
+.dark-mode-toggle {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  padding: 10px;
+  border-radius: 50%;
+  width: 45px;
+  height: 45px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  background: var(--primary);
+  border: none;
+  color: white;
+  transition: all 0.3s ease;
+  overflow: hidden;
+}
+
+.dark-mode-toggle:hover {
+  transform: scale(1.1);
+}
+
+.dark-mode .dark-mode-toggle {
+  background: #FFC107;
+}
+
+.dark-mode-toggle svg {
+  transition: all 0.5s cubic-bezier(0.645, 0.045, 0.355, 1);
+}
+
+.dark-mode .dark-mode-toggle svg {
+  transform: rotate(40deg) scale(0.9);
+}
+
+.dark-mode-toggle .sun {
+  opacity: 0;
+  position: absolute;
+}
+
+.dark-mode-toggle .moon {
+  opacity: 1;
+}
+
+.dark-mode .dark-mode-toggle .sun {
+  opacity: 1;
+}
+
+.dark-mode .dark-mode-toggle .moon {
+  opacity: 0;
+}
+
+.student-list-item {
+  background: white;
+  border-radius: 8px;
+  padding: 15px;
+  margin-bottom: 15px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.dark-mode .student-list-item {
+  background: var(--dark-card);
+  border: 1px solid var(--dark-border);
+}
+
+.room-number {
+  color: var(--primary);
+  cursor: pointer;
+  transition: color 0.3s;
+}
+
+.room-number:hover {
+  color: var(--dark);
+  text-decoration: underline;
+}
+
+.dark-mode .room-number {
+  color: var(--light);
+}
+
+.dark-mode .room-number:hover {
+  color: white;
+}
+
+.no-students {
+  text-align: center;
+  padding: 20px;
+  color: #666;
+  font-style: italic;
+}
+
+.dark-mode .no-students {
+  color: #aaa;
+}
+
+#studentListModal .modal-content {
+  max-height: 80vh;
+  overflow-y: auto;
+}
+
+.student-list-item p {
+  margin: 8px 0;
+}
+
+.student-list-item strong {
+  color: var(--primary);
+  min-width: 100px;
+  display: inline-block;
+}
+
+.dark-mode .student-list-item strong {
+  color: var(--light);
+}
+
+/* Thêm style cho modal header và nút đóng */
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #eee;
+}
+
+.dark-mode .modal-header {
+    border-bottom-color: var(--dark-border);
+}
+
+.close-btn {
+    background: none;
+    border: none;
+    font-size: 24px;
+    color: #666;
+    cursor: pointer;
+    padding: 0 8px;
+    line-height: 1;
+    border-radius: 50%;
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+.close-btn:hover {
+    background: rgba(0,0,0,0.1);
+    color: #333;
+    transform: none;
+    box-shadow: none;
+}
+
+.dark-mode .close-btn {
+    color: var(--dark-text);
+}
+
+.dark-mode .close-btn:hover {
+    background: rgba(255,255,255,0.1);
+    color: white;
+}
+
+/* Điều chỉnh lại style cho modal content */
+.modal-content {
+    position: relative;
+    padding: 20px;
+}
+
+/* Thêm style dark mode cho modal đăng ký */
+.dark-mode .register-modal .student-info {
+    background: var(--dark-card);
+    border: 1px solid var(--dark-border);
+}
+
+.dark-mode .register-modal h3 {
+    color: var(--light);
+}
+
+.dark-mode .form-group input {
+    background: var(--dark-input);
+    color: var(--dark-text);
+    border-color: var(--dark-border);
+}
+
+.dark-mode .form-group input::placeholder {
+    color: #666;
+}
+
+.dark-mode .form-group label {
+    color: var(--dark-text);
+}
+
+/* Điều chỉnh màu nền cho form đăng ký trong dark mode */
+.dark-mode .register-modal {
+    background: var(--dark-card);
+}
+
+/* Chỉnh sửa style cho hamburger menu */
+.hamburger-menu {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    z-index: 1000;
+    background: var(--primary);
+    border: none;
+    cursor: pointer;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+    width: 45px;
+    height: 45px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.hamburger-menu:hover {
+    background: var(--dark);
+    transform: none;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+.header h1 {
+    text-align: center;
+    width: 100%;
+}
+
+/* Sửa lại selector để ẩn hamburger menu khi sidebar mở */
+.sidebar.open + .hamburger-menu,
+#sidebar.open ~ .hamburger-menu {
+    display: none;
+}
+
+/* Điều chỉnh style cho các gạch ngang */
+.hamburger-icon {
+    width: 25px;
+    height: 20px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.hamburger-icon span {
+    display: block;
+    width: 100%;
+    height: 3px;
+    background: white;
+    border-radius: 3px;
+}
+
+.dark-mode .hamburger-icon span {
+    background: var(--dark-text);
+}
+
+/* Sidebar */
+.sidebar {
+  position: fixed;
+  left: -300px;
+  top: 0;
+  width: 300px;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  border-right: 1px solid rgba(255,255,255,0.2);
+  box-shadow: 5px 0 15px rgba(0,0,0,0.1);
+  transition: left 0.3s ease;
+  z-index: 999;
+}
+
+.sidebar.open {
+  left: 0;
+}
+
+.dark-mode .sidebar {
+  background: rgba(30, 30, 30, 0.95);
+  border-right: 1px solid rgba(255,255,255,0.1);
+}
+
+.sidebar-content {
+  padding-top: 60px;
+  padding: 60px 20px 20px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.sidebar-content button {
+  background: transparent;
+  color: #333;
+  box-shadow: none;
+  border-radius: 10px;
+  text-align: left;
+  padding: 15px;
+  margin: 5px 0;
+  transition: all 0.3s ease;
+  width: 100%;
+  text-align: left;
+  padding: 10px;
+  border: none;
+  border-radius: 4px;
+  background: var(--primary);
+  color: white;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.dark-mode .sidebar-content button {
+  background: var(--dark-card);
+  color: var(--dark-text);
+}
+
+.sidebar-content button:hover {
+  background: rgba(79, 70, 229, 0.1);
+  color: #4f46e5;
+  transform: translateX(5px);
+}
+
+/* Điều chỉnh vị trí dark mode toggle */
+.dark-mode-toggle {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 1001; /* Đảm bảo nút luôn ở trên cùng */
+    transition: right 0.3s ease;
+}
+
+/* Di chuyển nút dark mode khi sidebar mở */
+.sidebar.open ~ .dark-mode-toggle {
+    right: 20px;
+}
+
+#editBuildingModal .modal-content button[type="button"]:last-child {
+    background: linear-gradient(135deg, #9E9E9E, #757575);
+}
+
+#editBuildingModal .modal-content button[type="button"]:nth-child(2) {
+    background: linear-gradient(135deg, #f44336, #d32f2f);
+    margin-right: 5px;
+}
+
+#editBuildingModal .modal-content button[type="button"]:nth-child(2):hover {
+    background: linear-gradient(135deg, #d32f2f, #f44336);
+}
+
+.delete-btn {
+    background: linear-gradient(135deg, #f44336, #d32f2f) !important;
+    margin-right: 5px;
+}
+
+.delete-btn:hover {
+    background: linear-gradient(135deg, #d32f2f, #f44336) !important;
+}
+
+#editStatusModal .modal-content button {
+    margin: 5px;
+}
+
+/* Payment styles */
+.student-payment-info {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    margin-top: 20px;
+}
+
+.dark-mode .student-payment-info {
+    background: var(--dark-card);
+    color: var(--dark-text);
+}
+
+.payment-status {
+    padding: 5px 10px;
+    border-radius: 15px;
+    font-size: 14px;
+}
+
+.payment-status.paid {
+    background: #4CAF50;
+    color: white;
+}
+
+.payment-status.unpaid {
+    background: #F44336;
+    color: white;
+}
+
+#paymentSearchModal .modal-content {
+    max-width: 500px;
+}
+
+#paymentInfo {
+    margin-top: 20px;
+}
+
+#paymentInfo button {
+    margin-top: 15px;
+    width: 100%;
+}
+
+/* Unpaid students list styles */
+.unpaid-student-item {
+    background: white;
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.dark-mode .unpaid-student-item {
+    background: var(--dark-card);
+    color: var(--dark-text);
+}
+
+.building-group {
+    margin-bottom: 20px;
+}
+
+.building-group h3 {
+    margin-bottom: 10px;
+    color: var(--primary);
+    padding-bottom: 5px;
+    border-bottom: 2px solid var(--light);
+}
+
+.dark-mode .building-group h3 {
+    color: var(--light);
+    border-bottom-color: var(--dark-border);
+}
+
+.unpaid-student-item .student-info {
+    flex: 1;
+}
+
+.unpaid-student-item button {
+    margin-left: 15px;
+    white-space: nowrap;
+}
+
+.no-results {
+    text-align: center;
+    padding: 20px;
+    color: #666;
+    font-style: italic;
+}
+
+.dark-mode .no-results {
+    color: var(--dark-text);
+}
+
+#unpaidStudentsModal .modal-content {
+    max-width: 800px;
+    max-height: 80vh;
+    overflow-y: auto;
+}
+/* Thêm animation cho các elements */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.room-card {
+  animation: fadeIn 0.5s ease forwards;
+}
+
+/* Style cho thanh tìm kiếm trong modal sinh viên chưa đóng tiền */
+#unpaidStudentsList .search-box {
+    margin-bottom: 20px;
+}
+
+#unpaidStudentsList .search-box input {
+    width: 100%;
+    padding: 12px 20px;
+    border: 1px solid #ddd;
+    border-radius: 25px;
+    font-size: 16px;
+    transition: all 0.3s ease;
+    background: white;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+#unpaidStudentsList .search-box input:focus {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 2px 10px rgba(33, 150, 243, 0.2);
+}
+
+.dark-mode #unpaidStudentsList .search-box input {
+    background: var(--dark-input);
+    border-color: var(--dark-border);
+    color: var(--dark-text);
+}
+
+/* Animation cho kết quả tìm kiếm */
+.unpaid-student-item {
+    transition: all 0.3s ease;
+}
+
+.search-box button:hover {
+    background-color: #45a049;
+}
+
+.no-results {
+    text-align: center;
+    padding: 20px;
+    color: #666;
+    font-style: italic;
+}
+
+/* Thêm styles cho dropdown */
+.dropdown {
+    position: relative;
+    width: 100%;
+}
+
+.dropdown-btn {
+    width: 100%;
+    text-align: left;
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+    background: var(--primary);
+    color: white;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.dark-mode .dropdown-btn {
+    background: var(--dark-card);
+    color: var(--dark-text);
+}
+
+.dropdown-btn:hover {
+    background: linear-gradient(135deg, var(--dark), var(--primary));
+}
+
+.dropdown-content {
+    display: none;
+    padding: 5px 0;
+    background: white;
+    border-radius: 4px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.dark-mode .dropdown-content {
+    background: var(--dark-hover);
+}
+
+.dropdown-content.show {
+    display: block;
+}
+
+.dropdown-content button {
+    width: 100%;
+    text-align: left;
+    padding: 8px 15px;
+    background: transparent;
+    color: var(--text);
+    border: none;
+    border-radius: 0;
+    box-shadow: none;
+}
+
+.dark-mode .dropdown-content button {
+    color: var(--dark-text);
+}
+
+.dropdown-content button:hover {
+    background: var(--light);
+    transform: none;
+    box-shadow: none;
+}
+
+.dark-mode .dropdown-content button:hover {
+    background: var(--dark-hover);
+}
+
+.fa-chevron-down {
+    transition: transform 0.3s ease;
+}
+
+.dropdown-btn.active .fa-chevron-down {
+    transform: rotate(180deg);
+}
